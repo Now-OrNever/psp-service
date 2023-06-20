@@ -14,7 +14,7 @@ import java.util.Optional;
 public class TrainController {
 
     @Autowired
-    private TrainsService trainCheckingService;
+    private TrainsService trainsService;
 
     @GetMapping("/test")
     public String home() {
@@ -24,37 +24,37 @@ public class TrainController {
     //Find All Trains
     @GetMapping
     public List<Train> getTrains() {
-        return trainCheckingService.getTrains();
+        return trainsService.getTrains();
     }
 
     //Find Trains by Tid
     @GetMapping(value = "/{tid}")
     public Optional<Train> getTrainsById(@PathVariable String tid) {
-        return trainCheckingService.getTrainsById(tid);
+        return trainsService.getTrainsById(tid);
     }
 
     //Find Trains from particular source
     @GetMapping(value = "find/{source}/{destination}")
     public List<Train> getTrains(@PathVariable String source, @PathVariable String destination) {
-        return trainCheckingService.getTrains(source, destination);
+        return trainsService.getTrains(source, destination);
     }
 
     //Add train
     @PostMapping
     public Train addTrain(@RequestBody Train train) {
-        return trainCheckingService.addTrain(train);
+        return trainsService.addTrain(train);
     }
 
     //Update train by tid
     @PutMapping
     public Train updateTrain(@RequestBody Train train) {
-        return trainCheckingService.updateTrain(train);
+        return trainsService.updateTrain(train);
     }
 
     //Delete train by tid
     @DeleteMapping(value = "/{tid}")
     public String delete(@PathVariable String tid) {
-        return trainCheckingService.deleteTrain(tid);
+        return trainsService.deleteTrain(tid);
     }
 
 }

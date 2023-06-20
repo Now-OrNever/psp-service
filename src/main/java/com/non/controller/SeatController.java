@@ -13,7 +13,7 @@ import java.util.List;
 public class SeatController {
 
     @Autowired
-    private SeatsService ticketBookingService;
+    private SeatsService seatsService;
 
     @GetMapping(value = "/test")
     public String home() {
@@ -23,24 +23,24 @@ public class SeatController {
     //Find all Seats
     @GetMapping
     public List<Seat> getSeats() {
-        return ticketBookingService.getSeats();
+        return seatsService.getSeats();
     }
 
     //Find seats of a particular train
     @GetMapping(value = "/{tid}")
     public List<Seat> findSeats(@PathVariable String tid) {
-        return ticketBookingService.findSeats(tid);
+        return seatsService.findSeats(tid);
     }
 
     //Add seats into a train
     @PostMapping(value = "/{tid}")
     public Seat addSeat(@PathVariable String tid, @RequestBody Seat seat) {
-        return ticketBookingService.addSeat(tid, seat);
+        return seatsService.addSeat(tid, seat);
     }
 
     @PutMapping(value = "/{tid}")
     public Seat updateSeats(@PathVariable String tid, @RequestBody Seat seat) {
-        return ticketBookingService.addSeat(tid, seat);
+        return seatsService.addSeat(tid, seat);
     }
 
 }
