@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface TrainsService {
 
-    List<Train> getTrains();
+    List<Train> getAllTrains();
 
-    List<Train> getTrains(String source, String destination);
+    List<Train> getAllTrains(String source, String destination);
 
     Train addTrain(Train train);
 

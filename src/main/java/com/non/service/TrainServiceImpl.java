@@ -14,18 +14,19 @@ import java.util.Optional;
 public class TrainServiceImpl implements TrainsService {
 
     private final TrainRepository trainRepository;
+
     @Autowired
     public TrainServiceImpl(TrainRepository trainRepository) {
         this.trainRepository = trainRepository;
     }
 
     @Override
-    public List<Train> getTrains() {
+    public List<Train> getAllTrains() {
         return trainRepository.findAll();
     }
 
     @Override
-    public List<Train> getTrains(String source, String destination) {
+    public List<Train> getAllTrains(String source, String destination) {
         return trainRepository.findBySource(source, destination);
     }
 

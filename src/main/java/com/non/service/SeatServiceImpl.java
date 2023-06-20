@@ -20,6 +20,7 @@ public class SeatServiceImpl implements SeatsService {
     private final SeatRepository seatRepository;
 
     private final TrainRepository trainRepository;
+
     @Autowired
     public SeatServiceImpl(SeatRepository seatRepository, TrainRepository trainRepository) {
         this.seatRepository = seatRepository;

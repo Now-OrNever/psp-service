@@ -13,7 +13,8 @@ import java.util.List;
 public class SeatController {
 
     private final SeatsService seatsService;
-@Autowired
+
+    @Autowired
     public SeatController(SeatsService seatsService) {
         this.seatsService = seatsService;
     }

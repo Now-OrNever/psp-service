@@ -14,20 +14,16 @@ import java.util.Optional;
 public class TrainController {
 
     private final TrainsService trainsService;
+
     @Autowired
     public TrainController(TrainsService trainsService) {
         this.trainsService = trainsService;
     }
 
-    @GetMapping("/test")
-    public String home() {
-        return "Welcome to train checking";
-    }
-
     //Find All Trains
     @GetMapping
-    public List<Train> getTrains() {
-        return trainsService.getTrains();
+    public List<Train> getAllTrains() {
+        return trainsService.getAllTrains();
     }
 
     //Find Trains by Tid
@@ -38,8 +34,8 @@ public class TrainController {
 
     //Find Trains from particular source
     @GetMapping(value = "find/{source}/{destination}")
-    public List<Train> getTrains(@PathVariable String source, @PathVariable String destination) {
-        return trainsService.getTrains(source, destination);
+    public List<Train> getAllTrains(@PathVariable String source, @PathVariable String destination) {
+        return trainsService.getAllTrains(source, destination);
     }
 
     //Add train
