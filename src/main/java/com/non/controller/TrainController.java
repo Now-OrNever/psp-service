@@ -2,6 +2,7 @@ package com.non.controller;
 
 import com.non.model.Train;
 import com.non.service.provider.TrainsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Optional;
 public class TrainController {
 
     private final TrainsService trainsService;
-
+    @Autowired
     public TrainController(TrainsService trainsService) {
         this.trainsService = trainsService;
     }

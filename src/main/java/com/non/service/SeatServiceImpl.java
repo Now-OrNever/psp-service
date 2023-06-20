@@ -5,6 +5,7 @@ import com.non.model.Train;
 import com.non.repository.SeatRepository;
 import com.non.repository.TrainRepository;
 import com.non.service.provider.SeatsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,7 @@ public class SeatServiceImpl implements SeatsService {
     private final SeatRepository seatRepository;
 
     private final TrainRepository trainRepository;
-
+    @Autowired
     public SeatServiceImpl(SeatRepository seatRepository, TrainRepository trainRepository) {
         this.seatRepository = seatRepository;
         this.trainRepository = trainRepository;

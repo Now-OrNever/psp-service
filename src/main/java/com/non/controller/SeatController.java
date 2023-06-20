@@ -2,6 +2,7 @@ package com.non.controller;
 
 import com.non.model.Seat;
 import com.non.service.provider.SeatsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,17 +13,11 @@ import java.util.List;
 public class SeatController {
 
     private final SeatsService seatsService;
-
+@Autowired
     public SeatController(SeatsService seatsService) {
         this.seatsService = seatsService;
     }
 
-    @GetMapping(value = "/test")
-    public String home() {
-        return "Welcome to Ticket Booking";
-    }
-
-    //Find all Seats
     @GetMapping
     public List<Seat> getSeats() {
         return seatsService.getSeats();
