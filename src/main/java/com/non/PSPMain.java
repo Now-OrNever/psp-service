@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class RailwayApplication {
+public class PSPMain {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RailwayApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PSPMain.class, args);
+    }
 
 }
