@@ -3,7 +3,6 @@ package com.non.service;
 import com.non.model.Train;
 import com.non.repository.TrainRepository;
 import com.non.service.provider.TrainsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +12,11 @@ import java.util.Optional;
 @Service
 public class TrainServiceImpl implements TrainsService {
 
-    @Autowired
-    private TrainRepository trainRepository;
+    private final TrainRepository trainRepository;
+
+    public TrainServiceImpl(TrainRepository trainRepository) {
+        this.trainRepository = trainRepository;
+    }
 
     @Override
     public List<Train> getTrains() {

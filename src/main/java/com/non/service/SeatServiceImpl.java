@@ -5,7 +5,6 @@ import com.non.model.Train;
 import com.non.repository.SeatRepository;
 import com.non.repository.TrainRepository;
 import com.non.service.provider.SeatsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,11 +16,14 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class SeatServiceImpl implements SeatsService {
 
-    @Autowired
-    private SeatRepository seatRepository;
+    private final SeatRepository seatRepository;
 
-    @Autowired
-    private TrainRepository trainRepository;
+    private final TrainRepository trainRepository;
+
+    public SeatServiceImpl(SeatRepository seatRepository, TrainRepository trainRepository) {
+        this.seatRepository = seatRepository;
+        this.trainRepository = trainRepository;
+    }
 
     @Override
     public List<Seat> getSeats() {
