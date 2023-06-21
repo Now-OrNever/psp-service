@@ -47,12 +47,12 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public List<Seat> findSeats(String tId) {
-        Optional<Train> trainsOptional = trainRepository.findById(tId);
+    public List<Seat> findSeats(String tid) {
+        Optional<Train> trainsOptional = trainRepository.findById(tid);
         if (trainsOptional.isEmpty()) {
             return Collections.emptyList();
         }
-        return seatRepository.findSeatsByTid(tId);
+        return seatRepository.findSeatsBySid(tid);
     }
 
 
