@@ -7,16 +7,16 @@ import java.io.Serial;
  *
  * @author bharat.varshney
  */
-public class APIException extends RuntimeException {
+public class ApiException extends RuntimeException {
 
     @Serial
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    public APIException(String message) {
+    public ApiException(String message) {
         super(message);
     }
 
-    public APIException(String message, Throwable cause) {
+    public ApiException(String message, Throwable cause) {
         super(message, cause);
     }
 }

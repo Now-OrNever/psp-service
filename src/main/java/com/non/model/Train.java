@@ -2,7 +2,6 @@ package com.non.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +11,7 @@ import java.util.Set;
 public class Train {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @GeneratedValue(generator = "system-uuid", strategy = GenerationType.IDENTITY)
     private String tid;
     private String tName;
     private String source;

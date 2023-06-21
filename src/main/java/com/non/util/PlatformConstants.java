@@ -5,11 +5,11 @@ package com.non.util;
  *
  * @author bharat.varshney
  */
-public class PlatformConstant {
+public class PlatformConstants {
 
     public static final String ACCESS_CONTROL_ALLOW_ORIGIN_VALUE = "*";
 
-    private PlatformConstant() {
+    private PlatformConstants() {
     }
 
 }

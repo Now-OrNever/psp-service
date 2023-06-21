@@ -1,9 +1,9 @@
 package com.non.controller;
 
-import com.non.exception.APIException;
+import com.non.exception.ApiException;
 import com.non.model.Seat;
-import com.non.service.provider.SeatsService;
-import com.non.util.PlatformConstant;
+import com.non.service.provider.SeatService;
+import com.non.util.PlatformConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,45 +15,44 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = PlatformConstant.ACCESS_CONTROL_ALLOW_ORIGIN_VALUE, allowedHeaders = PlatformConstant.ACCESS_CONTROL_ALLOW_ORIGIN_VALUE)
-
-@RequestMapping("seats")
+@CrossOrigin(origins = PlatformConstants.ACCESS_CONTROL_ALLOW_ORIGIN_VALUE, allowedHeaders = PlatformConstants.ACCESS_CONTROL_ALLOW_ORIGIN_VALUE)
+@RequestMapping("/seats")
 public class SeatController {
     private static final Logger logger = LoggerFactory.getLogger(SeatController.class);
 
 
-    private final SeatsService seatsService;
+    private final SeatService seatService;
 
     @Autowired
-    public SeatController(SeatsService seatsService) {
-        this.seatsService = seatsService;
+    public SeatController(SeatService seatService) {
+        this.seatService = seatService;
     }
 
     @GetMapping
     public List<Seat> getSeats() {
-        return seatsService.getSeats();
+        return seatService.getSeats();
     }
 
     //Find seats of a particular train
-    @GetMapping(value = "/{tid}")
+    @GetMapping("/{tid}")
     public List<Seat> findSeats(@PathVariable String tid) {
-        return seatsService.findSeats(tid);
+        return seatService.findSeats(tid);
     }
 
     //Add seats into a train
-    @PostMapping(value = "/{tid}")
+    @PostMapping("/{tid}")
     public ResponseEntity<Seat> addSeat(@PathVariable String tid, @RequestBody Seat seat) {
         try {
-            logger.info("the tid is:{}", tid);
-            return ResponseEntity.ok(seatsService.addSeat(tid, seat));
-        } catch (APIException e) {
+            logger.info("The tid is: {}", tid);
+            return ResponseEntity.ok(seatService.addSeat(tid, seat));
+        } catch (ApiException e) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, e.getMessage());
         }
     }
 
-    @PutMapping(value = "/{tid}")
+    @PutMapping("/{tid}")
     public Seat updateSeats(@PathVariable String tid, @RequestBody Seat seat) {
-        return seatsService.addSeat(tid, seat);
+        return seatService.addSeat(tid, seat);
     }
 
 }

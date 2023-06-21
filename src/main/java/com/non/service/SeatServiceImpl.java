@@ -4,7 +4,7 @@ import com.non.model.Seat;
 import com.non.model.Train;
 import com.non.repository.SeatRepository;
 import com.non.repository.TrainRepository;
-import com.non.service.provider.SeatsService;
+import com.non.service.provider.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
-public class SeatServiceImpl implements SeatsService {
+public class SeatServiceImpl implements SeatService {
 
     private final SeatRepository seatRepository;
 

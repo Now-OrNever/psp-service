@@ -4,7 +4,7 @@ import com.non.model.Seat;
 
 import java.util.List;
 
-public interface SeatsService {
+public interface SeatService {
 
     List<Seat> getSeats();
 

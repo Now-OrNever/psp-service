@@ -2,7 +2,7 @@ package com.non.service;
 
 import com.non.model.Train;
 import com.non.repository.TrainRepository;
-import com.non.service.provider.TrainsService;
+import com.non.service.provider.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 @Service
-public class TrainServiceImpl implements TrainsService {
+public class TrainServiceImpl implements TrainService {
 
     private final TrainRepository trainRepository;
 

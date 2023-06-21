@@ -5,7 +5,7 @@ import com.non.model.Train;
 import java.util.List;
 import java.util.Optional;
 
-public interface TrainsService {
+public interface TrainService {
 
     List<Train> getAllTrains();
 

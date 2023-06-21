@@ -1,10 +1,8 @@
 package com.non.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
@@ -13,14 +11,14 @@ import java.util.Date;
 public class Seat {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @GeneratedValue(generator = "system-uuid", strategy = GenerationType.IDENTITY)
     private String sid;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     private Date date;
     private int count;
-    @JsonIgnore
+    @JoinColumn(name = "train_tid")
     @ManyToOne
     private Train train;
 
