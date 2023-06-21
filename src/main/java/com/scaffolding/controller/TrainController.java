@@ -1,9 +1,9 @@
-package com.non.controller;
+package com.scaffolding.controller;
 
-import com.non.exception.CustomException;
-import com.non.model.Train;
-import com.non.service.provider.TrainService;
-import com.non.util.PlatformConstants;
+import com.scaffolding.exception.CustomException;
+import com.scaffolding.model.Train;
+import com.scaffolding.service.TrainService;
+import com.scaffolding.util.PlatformConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +30,10 @@ public class TrainController {
 
     //Find All Trains
     @GetMapping
-    public ResponseEntity<List<Train>> getAllTrains() {
+    public ResponseEntity<List<Train>> getTrainsBySourceAndDestination() {
         try {
             logger.info("The tid is");
-            return ResponseEntity.ok(trainService.getAllTrains());
+            return ResponseEntity.ok(trainService.getTrainsBySourceAndDestination());
         } catch (CustomException e) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, e.getMessage());
         }
@@ -46,9 +46,9 @@ public class TrainController {
     }
 
     //Find Trains from particular source
-    @GetMapping("find/{source}/{destination}")
-    public List<Train> getAllTrains(@PathVariable String source, @PathVariable String destination) {
-        return trainService.getAllTrains(source, destination);
+    @GetMapping("/{source}/{destination}")
+    public List<Train> getTrainsBySourceAndDestination(@PathVariable String source, @PathVariable String destination) {
+        return trainService.getTrainsBySourceAndDestination(source, destination);
     }
 
     //Add train

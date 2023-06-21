@@ -1,6 +1,6 @@
-package com.non.repository;
+package com.scaffolding.repository;
 
-import com.non.model.Train;
+import com.scaffolding.model.Train;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

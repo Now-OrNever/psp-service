@@ -1,15 +1,15 @@
-package com.non.service.provider;
+package com.scaffolding.service;
 
-import com.non.model.Train;
+import com.scaffolding.model.Train;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface TrainService {
 
-    List<Train> getAllTrains();
+    List<Train> getTrainsBySourceAndDestination();
 
-    List<Train> getAllTrains(String source, String destination);
+    List<Train> getTrainsBySourceAndDestination(String source, String destination);
 
     Train addTrain(Train train);
 

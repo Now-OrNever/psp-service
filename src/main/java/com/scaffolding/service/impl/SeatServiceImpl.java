@@ -1,10 +1,10 @@
-package com.non.service;
+package com.scaffolding.service.impl;
 
-import com.non.model.Seat;
-import com.non.model.Train;
-import com.non.repository.SeatRepository;
-import com.non.repository.TrainRepository;
-import com.non.service.provider.SeatService;
+import com.scaffolding.model.Seat;
+import com.scaffolding.model.Train;
+import com.scaffolding.repository.SeatRepository;
+import com.scaffolding.repository.TrainRepository;
+import com.scaffolding.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

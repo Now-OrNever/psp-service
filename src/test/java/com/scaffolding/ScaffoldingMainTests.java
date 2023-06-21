@@ -1,10 +1,10 @@
-package com.non;
+package com.scaffolding;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PSPMainTests {
+class ScaffoldingMainTests {
 
     @Test
     void contextLoads() {

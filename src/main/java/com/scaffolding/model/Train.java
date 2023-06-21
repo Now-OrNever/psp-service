@@ -1,4 +1,4 @@
-package com.non.model;
+package com.scaffolding.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

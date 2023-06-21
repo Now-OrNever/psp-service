@@ -1,8 +1,8 @@
-package com.non.service;
+package com.scaffolding.service.impl;
 
-import com.non.model.Train;
-import com.non.repository.TrainRepository;
-import com.non.service.provider.TrainService;
+import com.scaffolding.model.Train;
+import com.scaffolding.repository.TrainRepository;
+import com.scaffolding.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +21,12 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
-    public List<Train> getAllTrains() {
+    public List<Train> getTrainsBySourceAndDestination() {
         return trainRepository.findAll();
     }
 
     @Override
-    public List<Train> getAllTrains(String source, String destination) {
+    public List<Train> getTrainsBySourceAndDestination(String source, String destination) {
         return trainRepository.findBySource(source, destination);
     }
 

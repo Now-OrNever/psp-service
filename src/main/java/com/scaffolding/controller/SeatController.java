@@ -1,9 +1,9 @@
-package com.non.controller;
+package com.scaffolding.controller;
 
-import com.non.exception.ApiException;
-import com.non.model.Seat;
-import com.non.service.provider.SeatService;
-import com.non.util.PlatformConstants;
+import com.scaffolding.exception.ApiException;
+import com.scaffolding.model.Seat;
+import com.scaffolding.service.SeatService;
+import com.scaffolding.util.PlatformConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

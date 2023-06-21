@@ -1,6 +1,7 @@
-package com.non.model;
+package com.scaffolding.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class Seat {
     @Temporal(TemporalType.DATE)
     private Date date;
     private int count;
+    @JsonIgnore
     @JoinColumn(name = "train_tid")
     @ManyToOne
     private Train train;

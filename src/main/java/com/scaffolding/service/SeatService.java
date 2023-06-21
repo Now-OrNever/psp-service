@@ -1,6 +1,6 @@
-package com.non.service.provider;
+package com.scaffolding.service;
 
-import com.non.model.Seat;
+import com.scaffolding.model.Seat;
 
 import java.util.List;
 
