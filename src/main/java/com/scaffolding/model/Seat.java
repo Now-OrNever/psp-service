@@ -12,16 +12,17 @@ import java.util.Date;
 public class Seat {
 
     @Id
+    @Column(columnDefinition = "INT")
     @GeneratedValue(generator = "system-uuid", strategy = GenerationType.IDENTITY)
-    private String sid;
+    private Integer sid;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     private Date date;
     private int count;
     @JsonIgnore
-    @JoinColumn(name = "train_tid")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "train_tid", referencedColumnName = "tid")
     private Train train;
 
 }

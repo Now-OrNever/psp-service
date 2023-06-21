@@ -7,15 +7,15 @@ import java.util.Optional;
 
 public interface TrainService {
 
-    List<Train> getTrainsBySourceAndDestination();
+    List<Train> getAllTrains();
 
     List<Train> getTrainsBySourceAndDestination(String source, String destination);
 
     Train addTrain(Train train);
 
-    Optional<Train> getTrainsById(String tid);
+    Optional<Train> getTrainsById(Integer tid);
 
-    String deleteTrain(String tid);
+    String deleteTrain(Integer tid);
 
     Train updateTrain(Train train);
 

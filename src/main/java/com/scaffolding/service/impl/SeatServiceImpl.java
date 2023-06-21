@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class SeatServiceImpl implements SeatService {
 
     private final SeatRepository seatRepository;
@@ -33,8 +33,8 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Seat addSeat(String tId, Seat seat) {
+    @Transactional
+    public Seat addSeat(Integer tId, Seat seat) {
         Optional<Train> trainsOptional = trainRepository.findById(tId);
         if (trainsOptional.isEmpty()) {
             return null;
@@ -47,7 +47,7 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public List<Seat> findSeats(String tid) {
+    public List<Seat> findSeats(Integer tid) {
         Optional<Train> trainsOptional = trainRepository.findById(tid);
         if (trainsOptional.isEmpty()) {
             return Collections.emptyList();

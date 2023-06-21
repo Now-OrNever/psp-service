@@ -8,8 +8,8 @@ public interface SeatService {
 
     List<Seat> getSeats();
 
-    Seat addSeat(String tId, Seat seat);
+    Seat addSeat(Integer tId, Seat seat);
 
-    List<Seat> findSeats(String tId);
+    List<Seat> findSeats(Integer tId);
 
 }

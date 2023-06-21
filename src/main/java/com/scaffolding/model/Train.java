@@ -11,8 +11,9 @@ import java.util.Set;
 public class Train {
 
     @Id
+    @Column(columnDefinition = "INT")
     @GeneratedValue(generator = "system-uuid", strategy = GenerationType.IDENTITY)
-    private String tid;
+    private Integer tid;
     private String tName;
     private String source;
     private String destination;

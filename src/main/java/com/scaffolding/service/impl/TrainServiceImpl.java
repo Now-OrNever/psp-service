@@ -21,7 +21,7 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
-    public List<Train> getTrainsBySourceAndDestination() {
+    public List<Train> getAllTrains() {
         return trainRepository.findAll();
     }
 
@@ -47,12 +47,12 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
-    public Optional<Train> getTrainsById(String tid) {
+    public Optional<Train> getTrainsById(Integer tid) {
         return trainRepository.findById(tid);
     }
 
     @Override
-    public String deleteTrain(String tid) {
+    public String deleteTrain(Integer tid) {
         trainRepository.deleteById(tid);
         return "Train deleted";
     }

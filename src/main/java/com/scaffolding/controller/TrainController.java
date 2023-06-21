@@ -30,10 +30,10 @@ public class TrainController {
 
     //Find All Trains
     @GetMapping
-    public ResponseEntity<List<Train>> getTrainsBySourceAndDestination() {
+    public ResponseEntity<List<Train>> getAllTrains() {
         try {
             logger.info("The tid is");
-            return ResponseEntity.ok(trainService.getTrainsBySourceAndDestination());
+            return ResponseEntity.ok(trainService.getAllTrains());
         } catch (CustomException e) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, e.getMessage());
         }
@@ -41,7 +41,7 @@ public class TrainController {
 
     //Find Trains by Tid
     @GetMapping("/{tid}")
-    public Optional<Train> getTrainsById(@PathVariable String tid) {
+    public Optional<Train> getTrainsById(@PathVariable Integer tid) {
         return trainService.getTrainsById(tid);
     }
 
@@ -65,7 +65,7 @@ public class TrainController {
 
     //Delete train by tid
     @DeleteMapping("/{tid}")
-    public String delete(@PathVariable String tid) {
+    public String delete(@PathVariable Integer tid) {
         return trainService.deleteTrain(tid);
     }
 

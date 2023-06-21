@@ -35,13 +35,13 @@ public class SeatController {
 
     //Find seats of a particular train
     @GetMapping("/{tid}")
-    public List<Seat> findSeats(@PathVariable String tid) {
+    public List<Seat> findSeats(@PathVariable Integer tid) {
         return seatService.findSeats(tid);
     }
 
     //Add seats into a train
     @PostMapping("/{tid}")
-    public ResponseEntity<Seat> addSeat(@PathVariable String tid, @RequestBody Seat seat) {
+    public ResponseEntity<Seat> addSeat(@PathVariable Integer tid, @RequestBody Seat seat) {
         try {
             logger.info("The tid is: {}", tid);
             return ResponseEntity.ok(seatService.addSeat(tid, seat));
@@ -51,7 +51,7 @@ public class SeatController {
     }
 
     @PutMapping("/{tid}")
-    public Seat updateSeats(@PathVariable String tid, @RequestBody Seat seat) {
+    public Seat updateSeats(@PathVariable Integer tid, @RequestBody Seat seat) {
         return seatService.addSeat(tid, seat);
     }
 

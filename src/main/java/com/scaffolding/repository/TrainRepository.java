@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TrainRepository extends JpaRepository<Train, String> {
+public interface TrainRepository extends JpaRepository<Train, Integer> {
 
     @Query(value = "select * from train t where t.source = :source and t.destination= :destination", nativeQuery = true)
     List<Train> findBySource(@Param("source") String source, @Param("destination") String destination);
