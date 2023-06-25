@@ -8,14 +8,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService{
+public class UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    public List<User> getUsers(){
+
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 }

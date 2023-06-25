@@ -1,7 +1,6 @@
 package com.non.controller;
 
 import com.non.model.User;
-import com.non.repository.UserRepository;
 import com.non.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +14,12 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService){ this.userService = userService; }
-    @GetMapping("fetch-all-users")
-    public List<User> getUsers(){
-        return userService.getUsers();
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("users")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 }
