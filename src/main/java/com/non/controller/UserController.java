@@ -4,6 +4,7 @@ import com.non.exception.ApiException;
 import com.non.model.User;
 import com.non.service.UserService;
 import com.non.util.PspServiceConstants;
+import com.non.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,19 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public void addUser(@RequestParam(required = true) String first_name, String last_name , String email , String username) {
-        User user = new User(username, first_name, last_name, email);
+    public void addUser(@RequestParam String first_name, String last_name , String email , String username,
+                        @RequestParam(required = false) Role role) {
+        User user;
+        if(role != null)
+        {
+            user = new User(username, first_name, last_name, email, role);
+
+        }
+        else
+        {
+             user = new User(username, first_name, last_name, email);
+        }
         userService.addNewUser(user);
+
     }
 }
