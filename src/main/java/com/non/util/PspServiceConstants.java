@@ -5,11 +5,11 @@ package com.non.util;
  *
  * @author bharat.varshney
  */
-public class PlatformConstants {
+public class PspServiceConstants {
 
     public static final String ACCESS_CONTROL_ALLOW_ORIGIN_VALUE = "*";
 
-    private PlatformConstants() {
+    private PspServiceConstants() {
     }
 
 }
