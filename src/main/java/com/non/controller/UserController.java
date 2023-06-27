@@ -4,12 +4,9 @@ import com.non.exception.ApiException;
 import com.non.model.User;
 import com.non.service.UserService;
 import com.non.util.PspServiceConstants;
-import com.scaffolding.util.PlatformConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -25,12 +22,19 @@ public class UserController {
         this.userService = userService;
     }
 
+
     @GetMapping("/users")
     public List<User> getAllUsers() {
-        try{
+        try {
             return userService.getAllUsers();
-        }catch (ApiException e) {
+        } catch (ApiException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+
+    @PostMapping("/user")
+    public void addUser(@RequestParam(required = true) String first_name, String last_name , String email , String username) {
+        User user = new User(username, first_name, last_name, email);
+        userService.addNewUser(user);
     }
 }

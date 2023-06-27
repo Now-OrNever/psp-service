@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class User extends BaseEntity {
     @Id
@@ -47,4 +47,5 @@ public class User extends BaseEntity {
         this.email = email;
         this.role = Role.MENTEE;
     }
+
 }
