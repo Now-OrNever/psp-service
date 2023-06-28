@@ -34,9 +34,14 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public void addUser(@RequestParam String first_name, String last_name , String email , String username,
-                        @RequestParam(required = false) Role role) {
-        User user;
+    public void addUser(@RequestBody User user) {
+
+        String first_name = user.getFirstName();
+        String last_name = user.getLastName();
+        String email = user.getEmail();
+        String username = user.getUsername();
+        Role role = user.getRole();
+
         if(role != null)
         {
             user = new User(username, first_name, last_name, email, role);
