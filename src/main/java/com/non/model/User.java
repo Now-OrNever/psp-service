@@ -1,5 +1,6 @@
 package com.non.model;
 
+
 import com.non.util.Role;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -48,4 +49,6 @@ public class User extends BaseEntity {
         this.role = Role.MENTEE;
     }
 
+    public void setName(Object name) {
+    }
 }

@@ -1,39 +1,42 @@
 package com.non.controller;
 
-import com.non.exception.ApiException;
+
 import com.non.model.User;
+import com.non.repository.UserRepository;
 import com.non.service.UserService;
 import com.non.util.PspServiceConstants;
 import com.non.util.Role;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.web.bind.annotation.*;
+
+
+import java.util.Map;
+
 
 @RestController
 @CrossOrigin(origins = PspServiceConstants.ACCESS_CONTROL_ALLOW_ORIGIN_VALUE, allowedHeaders = PspServiceConstants.ACCESS_CONTROL_ALLOW_ORIGIN_VALUE)
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
+
 
 
     @GetMapping("/users")
-    public List<User> getAllUsers() {
-        try {
-            return userService.getAllUsers();
-        } catch (ApiException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
+    public Map<String, Object> currentUser(OAuth2AuthenticationToken oAuth2AuthenticationToken){
 
-    @PostMapping("/user")
+        return oAuth2AuthenticationToken.getPrincipal().getAttributes();
+    }
+    @PostMapping("/users")
     public void addUser(@RequestBody User user) {
 
         String first_name = user.getFirstName();
@@ -54,4 +57,14 @@ public class UserController {
         userService.addNewUser(user);
 
     }
+
+//    @GetMapping ("/auth")
+//    public OAuth2AuthenticatedPrincipal currentUser(OAuth2AuthenticationToken authentication) {
+//        OAuth2AuthenticatedPrincipal principal = authentication.getPrincipal();
+//        User user = new User();
+//        user.setUsername(principal.getAttribute("username"));
+//        user.setEmail(principal.getAttribute("email"));
+//        user.setName(principal.getAttribute("name"));
+//        return principal;
+//    }
 }

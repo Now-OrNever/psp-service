@@ -6,6 +6,8 @@ import com.non.repository.UserRepository;
 import com.non.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -32,5 +34,14 @@ public class UserServiceImpl implements UserService {
         } catch (ApiException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+    @Override
+    public void currentUser(OAuth2AuthenticationToken authentication){
+        OAuth2AuthenticatedPrincipal principal = authentication.getPrincipal();
+        User user = new User();
+        user.setUsername(principal.getAttribute("username"));
+        user.setEmail(principal.getAttribute("email"));
+        user.setName(principal.getAttribute("name"));
+        userRepository.save(user);
     }
 }
