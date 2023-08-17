@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/non/day")
+@CrossOrigin("http://localhost:3000")
 public class DayController {
     @Autowired
     private DayRepository dayRepository;

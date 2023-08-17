@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/non/questionstatus")
+@CrossOrigin("http://localhost:3000")
 public class QuestionStatusController {
 
     @Autowired
@@ -37,7 +38,7 @@ public class QuestionStatusController {
         return questionStatus;
     }
 
-    @PutMapping("statusUpdate/{questionId}/{userId}")
+    @PutMapping("/statusUpdate/{questionId}/{userId}")
     public QuestionStatus updateQuestionStatus(@RequestBody QuestionStatus newQuestionStatus, @PathVariable String questionId, @PathVariable String userId) {
         QuestionStatus questionStatus = questionStatusRepository.findByQuestionIdAndUserId(questionId, userId);
 
@@ -50,7 +51,7 @@ public class QuestionStatusController {
         return questionStatus;
     }
 
-    @PutMapping("noteUpdate/{questionId}/{userId}")
+    @PutMapping("/noteUpdate/{questionId}/{userId}")
     public QuestionStatus updateNote(@RequestBody QuestionStatus newQuestionStatus, @PathVariable String questionId, @PathVariable String userId) {
         QuestionStatus questionStatus = questionStatusRepository.findByQuestionIdAndUserId(questionId, userId);
 
