@@ -24,12 +24,15 @@ public class Question {
     //    private String notes;
 //    private String status;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<QuestionStatus> questionStatuses;
 
-    public Question(String questionId, String questionName, List<String> tags, String questionLink) {
+    public Question(String questionId, String questionName, List<String> tags, String questionLink, List<QuestionStatus> questionStatuses) {
         this.questionId = questionId;
         this.questionName = questionName;
         this.tags = tags;
         this.questionLink = questionLink;
+        this.questionStatuses = questionStatuses;
     }
 
     public String getQuestionId() {
@@ -56,7 +59,6 @@ public class Question {
         this.tags = tags;
     }
 
-
     public String getQuestionLink() {
         return questionLink;
     }
@@ -65,4 +67,11 @@ public class Question {
         this.questionLink = questionLink;
     }
 
+    public List<QuestionStatus> getQuestionStatuses() {
+        return questionStatuses;
+    }
+
+    public void setQuestionStatuses(List<QuestionStatus> questionStatuses) {
+        this.questionStatuses = questionStatuses;
+    }
 }

@@ -1,16 +1,16 @@
 package com.non.controller;
 
 
-import com.non.exception.QuestionNotFoundException;
 import com.non.exception.QuestionStatusNotFoundException;
 import com.non.model.Question;
 import com.non.model.QuestionStatus;
+import com.non.repository.QuestionRepository;
 import com.non.repository.QuestionStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/non/questionstatus")
@@ -20,8 +20,12 @@ public class QuestionStatusController {
     @Autowired
     QuestionStatusRepository questionStatusRepository;
 
-    public QuestionStatusController(QuestionStatusRepository questionStatusRepository) {
+    @Autowired
+    QuestionRepository questionRepository;
+
+    public QuestionStatusController(QuestionStatusRepository questionStatusRepository, QuestionRepository questionRepository) {
         this.questionStatusRepository = questionStatusRepository;
+        this.questionRepository = questionRepository;
     }
 
     @GetMapping("/{questionId}/{userId}")
@@ -36,6 +40,19 @@ public class QuestionStatusController {
         }
 
         return questionStatus;
+    }
+
+//    @GetMapping("combine/{userId}")
+//    public List <QuestionStatus> findAllQuestionStatusOfUserId(@PathVariable String userId){
+//        List <QuestionStatus> questionStatuses = questionStatusRepository.findByUserId(userId);
+//        List < Question > questions = questionRepository.findAll();
+//        List<QuestionStatusDto> questionStatusDtos = new ArrayList<>();
+//    }
+
+    @GetMapping("/{userId}")
+    public List <QuestionStatus> findQuestionStatusByUserId(@PathVariable String userId){
+        List <QuestionStatus> questionStatuses = questionStatusRepository.findByUserId(userId);
+        return questionStatuses;
     }
 
     @PutMapping("/statusUpdate/{questionId}/{userId}")
@@ -59,7 +76,11 @@ public class QuestionStatusController {
             throw new QuestionStatusNotFoundException(questionId, userId);
         }
 
+        questionStatus.setApproach(newQuestionStatus.getApproach());
+        questionStatus.setMemoryComplexity(newQuestionStatus.getMemoryComplexity());
+        questionStatus.setTimeComplexity(newQuestionStatus.getTimeComplexity());
         questionStatus.setNote(newQuestionStatus.getNote());
+        questionStatus.setDifficultyLevel(newQuestionStatus.getDifficultyLevel());
         questionStatusRepository.save(questionStatus);
         return questionStatus;
     }

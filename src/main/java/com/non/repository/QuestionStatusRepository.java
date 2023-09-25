@@ -6,9 +6,11 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface QuestionStatusRepository extends CrudRepository<QuestionStatus, Long> {
+public interface QuestionStatusRepository extends JpaRepository<QuestionStatus, Long> {
     QuestionStatus findByQuestionIdAndUserId(String questionId, String userId);
 
     List <QuestionStatus> findByQuestionId(String questionId);
+
+    List <QuestionStatus> findByUserId(String userId);
 
 }

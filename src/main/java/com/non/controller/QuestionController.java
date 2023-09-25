@@ -9,6 +9,8 @@ import com.non.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/non/question")
 @CrossOrigin("http://localhost:3000")
@@ -20,8 +22,17 @@ public class QuestionController {
         this.questionRepository = questionRepository;
     }
 
+    @GetMapping
+    public List<Question> findAllQuestion() {return questionRepository.findAll();}
+
     @GetMapping("/{questionId}")
     public Question findQuestion(@PathVariable String questionId){ return questionRepository.findById(questionId).orElse(null);}
+
+//    @GetMapping("/trial")
+//    public List<Question> findQuestionForTrial(){
+//        List <Question> questions = questionRepository.findForTrial();
+//        return questions;
+//    }
 
     @PutMapping("/{questionId}")
     public Question updateQuestion(@RequestBody Question newQuestion ,@PathVariable String questionId){
