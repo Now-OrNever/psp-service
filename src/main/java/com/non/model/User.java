@@ -20,9 +20,6 @@ public class User {
     private long userId;
     private String userName;
     private String name;
-    @ManyToMany(mappedBy = "users", cascade={CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.EAGER)
-    @Fetch(FetchMode.JOIN)
-    private List<Question> userQues = new ArrayList<>();
 
     public User() {
     }
@@ -49,13 +46,5 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Question> getUserQues() {
-        return userQues;
-    }
-
-    public void setUserQues(List<Question> userQues) {
-        this.userQues = userQues;
     }
 }
