@@ -1,7 +1,11 @@
 package com.non.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Transactional
@@ -15,6 +19,10 @@ public class Question {
     private String title;
     @Column(name = "link", columnDefinition = "VARCHAR(255)")
     private String link;
+    private String level;
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "questions")
+    private List<User> users;
 
     public Integer getId() {
         return id;
@@ -35,11 +43,29 @@ public class Question {
         this.link = link;
     }
 
-    public Question() {
+    public String getLevel() {
+        return level;
     }
 
-    public Question(String title, String link) {
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public Question() {
+        this.users = new ArrayList<>();
+    }
+
+    public Question(String title, String link, String level) {
         this.title = title;
         this.link = link;
+        this.level = level;
     }
 }

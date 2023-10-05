@@ -1,5 +1,6 @@
 package com.non.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.Data;
@@ -20,8 +21,16 @@ public class User {
     private long userId;
     private String userName;
     private String name;
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_question",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "question_id")}
+    )
+    private List<Question> questions;
 
     public User() {
+        this.questions = new ArrayList<>();
     }
 
     public User(String userName, String name) {
@@ -46,5 +55,12 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }
