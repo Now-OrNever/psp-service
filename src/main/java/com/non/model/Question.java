@@ -19,7 +19,6 @@ public class Question {
     private String title;
     @Column(name = "link", columnDefinition = "VARCHAR(255)")
     private String link;
-    private String level;
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "questions")
     private List<User> users;
@@ -43,14 +42,6 @@ public class Question {
         this.link = link;
     }
 
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
     public List<User> getUsers() {
         return users;
     }
@@ -63,9 +54,8 @@ public class Question {
         this.users = new ArrayList<>();
     }
 
-    public Question(String title, String link, String level) {
+    public Question(String title, String link) {
         this.title = title;
         this.link = link;
-        this.level = level;
     }
 }

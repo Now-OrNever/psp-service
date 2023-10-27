@@ -1,6 +1,5 @@
 package com.non.controller;
 
-import com.non.Classes.UserClass;
 import com.non.exception.ResourceNotFoundException;
 import com.non.model.Question;
 import com.non.model.User;
@@ -27,16 +26,10 @@ public class Analysis {
     @Autowired
     private QuestionRepository questionRepository;
 
-    @RequestMapping("/users")
-    List<UserClass> sendUsers() {
-        List<User> users = userRepository.findAll();
-        List<UserClass> userClass = new ArrayList<>();
-        for(Integer i=0; i<users.size(); i++){
-            UserClass user = new UserClass(users.get(i).getUserId(), users.get(i).getName(), users.get(i).getQuestions().size());
-            userClass.add(user);
-        }
-        return userClass;
-    }
+//    @RequestMapping("/users")
+//    List<UserClass> sendUsers() {
+//        List<UserClass> users =
+//    }
 
     @RequestMapping("/users/{userId}")
     User sendUser(@PathVariable long userId){

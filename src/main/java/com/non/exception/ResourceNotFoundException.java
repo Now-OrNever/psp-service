@@ -1,5 +1,7 @@
 package com.non.exception;
 
+import java.util.function.Supplier;
+
 public class ResourceNotFoundException extends RuntimeException{
 
     String resourceName;
