@@ -15,14 +15,7 @@ public class CardServiceImpl implements CardService {
     private CardRepository cardRepository;
     @Override
     public Card createCard(Card card) {
-        Card c = new Card();
-        c.setName(card.getName());
-        c.setTimeComp(card.getTimeComp());
-        c.setMemComp(card.getMemComp());
-        c.setComment(card.getComment());
-        c.setDifficulty(card.getDifficulty());
-        c.setBookmark(card.getBookmark());
-        return cardRepository.save(c);
+        return cardRepository.save(card);
     }
 
     @Override
@@ -40,6 +33,12 @@ public class CardServiceImpl implements CardService {
     public Card updateCard(Integer id, Card card) {
         Card card1 = cardRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Card", "Id", id));
+        card1.setName(card.getName());
+        card1.setTimeComp(card.getTimeComp());
+        card1.setMemComp(card.getMemComp());
+        card1.setComment(card.getComment());
+        card1.setDifficulty(card.getDifficulty());
+        card1.setBookmark(card.getBookmark());
         card1.setComment(card.getComment());
         return cardRepository.save(card1);
     }

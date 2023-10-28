@@ -18,21 +18,18 @@ public class QuesController {
         this.quesService = quesService;
     }
 
-    @GetMapping("/q")
+    @GetMapping("/")
     List<Question> getAllQues(){
-        System.out.println("All Questions GET Resquest");
         return quesService.getAllQues();
     }
 
     @GetMapping("/{id}")
-    Question getAllQues(@PathVariable Integer id){
-        System.out.println("Question GET Request by Id");
+    Question getQues(@PathVariable Integer id){
         return quesService.getQuesById(id);
     }
 
-    @PostMapping("/pq")
+    @PostMapping("/")
     Question setQues(@RequestBody Question question){
-        System.out.println("Question POST Request");
         return this.quesService.createQues(question);
     }
 

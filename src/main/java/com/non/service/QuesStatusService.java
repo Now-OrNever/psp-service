@@ -5,11 +5,11 @@ import com.non.model.QuestionStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface QuesStatusService {
-    QuestionStatus createQuesStatus();
+    QuestionStatus createQuesStatus(QuestionStatus questionStatus);
     List<QuestionStatus> getAllQuesStatus();
-    QuestionStatus getQuesStatusById();
-    QuestionStatus updateQuesStatus();
-    void deleteQuesStatus();
+    QuestionStatus getQuesStatusById(Integer id);
+    QuestionStatus updateQuesStatus(Integer id, QuestionStatus questionStatus);
+    String deleteQuesStatus(Integer id);
 }

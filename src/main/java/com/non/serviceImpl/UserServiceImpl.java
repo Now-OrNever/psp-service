@@ -5,48 +5,50 @@ import com.non.exception.ResourceNotFoundException;
 import com.non.model.User;
 import com.non.repository.UserRepository;
 import com.non.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Service
+public class UserServiceImpl implements UserService {
 
-public abstract class UserServiceImpl implements UserService {
+    @Autowired
     private UserRepository userRepository;
-    public UserClass createUesr(UserClass user){
-        User model = this.userToModel(user);
-        userRepository.save(model);
-        return user;
+    @Override
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override
-    public List<UserClass> getUsers(){
-        List<User> users = userRepository.findAll();
-        List<UserClass> userClass = new ArrayList<>();
-        for (User value : users) {
-            UserClass user = this.modelToUser(value);
-            userClass.add(user);
-        }
-        return userClass;
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
-    UserClass getUser(long id){
-        User user = this.userRepository.findById(id)
+    @Override
+    public User getUser(Long id) {
+        return userRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("User", "Id", id));
-        return modelToUser(user);
-    }
-    UserClass updateUser(long id, UserClass userClass){
-        User user = this.userRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("User", "Id", id));
-        user.setUserName(userClass.getUserName());
-        user.setName(userClass.getName());
-        User updatedUser = userRepository.save(user);
-        return modelToUser(updatedUser);
     }
 
-    String deleteUser(long id){
+    @Override
+    public User updateUser(Long id, User user) {
+        User user1 = userRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("User", "Id", id));
+
+        user1.setName(user.getName());
+        user1.setUserName(user.getUserName());
+        return userRepository.save(user1);
+    }
+
+    @Override
+    public String deleteUser(Long id) {
         userRepository.deleteById(id);
-        return "User deleted with id: " + id ;
+        return "User is deleted with Id: " + id;
     }
+
+
+    // Extra Methods
 
     private User userToModel(UserClass user){
         User model = new User();
@@ -63,4 +65,5 @@ public abstract class UserServiceImpl implements UserService {
         user.setQues(model.getQuestions().size());
         return user;
     }
+
 }
