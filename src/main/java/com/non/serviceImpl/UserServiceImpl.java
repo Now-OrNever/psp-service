@@ -2,10 +2,15 @@ package com.non.serviceImpl;
 
 import com.non.Classes.UserClass;
 import com.non.exception.ResourceNotFoundException;
+import com.non.model.Question;
+import com.non.model.QuestionStatus;
 import com.non.model.User;
 import com.non.repository.UserRepository;
+import com.non.service.QuesService;
 import com.non.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,9 +31,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("User", "Id", id));
+    public ResponseEntity<User> getUser(Long id) {
+         return new ResponseEntity<>(userRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("User", "Id", id)), HttpStatus.ACCEPTED);
     }
 
     @Override

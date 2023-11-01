@@ -3,6 +3,8 @@ package com.non.controller;
 import com.non.model.Question;
 import com.non.service.QuesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +43,11 @@ public class QuesController {
     @DeleteMapping("{id}")
     String deleteQues(@PathVariable Integer id){
         return quesService.deleteQues(id);
+    }
+
+    @PutMapping("/{quesId}/{statusId}")
+    ResponseEntity<String> updateQuesStatus(@PathVariable Integer quesId, @PathVariable Integer statusId){
+        return new ResponseEntity<>(quesService.updateQuesStatus(quesId, statusId), HttpStatus.ACCEPTED);
     }
 
 }

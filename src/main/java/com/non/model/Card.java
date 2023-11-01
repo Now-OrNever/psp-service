@@ -24,4 +24,10 @@ public class Card {
     private String difficulty;
     private String bookmark;
 
+    @ManyToOne
+    private Question question;
+
+    @ManyToOne
+    private User user;
+
 }

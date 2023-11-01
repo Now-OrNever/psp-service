@@ -3,8 +3,7 @@ package com.non.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -12,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Transactional
 @Table(name = "user")
 public class User {
@@ -21,46 +24,49 @@ public class User {
     private long userId;
     private String userName;
     private String name;
+
+    @OneToMany
+    private List<Card> cards = new ArrayList<>();
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_question",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "question_id")}
     )
-    private List<Question> questions;
+    private List<Question> questions = new ArrayList<>();
 
-    public User() {
-        this.questions = new ArrayList<>();
-    }
+//    public User() {
+//        this.questions = new ArrayList<>();
+//    }
 
-    public User(String userName, String name) {
-        this.userName = userName;
-        this.name = name;
-    }
+//    public User(String userName, String name) {
+//        this.userName = userName;
+//        this.name = name;
+//    }
 
-    public long getUserId() {
-        return userId;
-    }
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
+//    public long getUserId() {
+//        return userId;
+//    }
+//    public String getUserName() {
+//        return userName;
+//    }
+//
+//    public void setUserName(String userName) {
+//        this.userName = userName;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//    public List<Question> getQuestions() {
+//        return questions;
+//    }
+//
+//    public void setQuestions(List<Question> questions) {
+//        this.questions = questions;
+//    }
 }

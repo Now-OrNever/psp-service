@@ -2,7 +2,9 @@ package com.non.serviceImpl;
 
 import com.non.exception.ResourceNotFoundException;
 import com.non.model.Question;
+import com.non.model.QuestionStatus;
 import com.non.repository.QuestionRepository;
+import com.non.repository.QuestionStatusRepo;
 import com.non.service.QuesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,11 @@ public class QuesServiceImpl implements QuesService {
     @Autowired
     private QuestionRepository questionRepository;
 
+    @Autowired
+    private QuestionStatusRepo questionStatusRepo;
+
     @Override
     public Question createQues(Question question) {
-        System.out.println("Question creation in DB is started");
         Question ques = new Question();
         ques.setTitle(question.getTitle());
         ques.setLink(question.getLink());
@@ -25,12 +29,10 @@ public class QuesServiceImpl implements QuesService {
 
     @Override
     public List<Question> getAllQues() {
-        System.out.println("Sending all the Questions");
         return questionRepository.findAll();
     }
     @Override
     public Question getQuesById(Integer id){
-        System.out.println("Sending Question by Id");
         return questionRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Question", "Id", id));
     }
@@ -46,5 +48,16 @@ public class QuesServiceImpl implements QuesService {
     public String deleteQues(Integer id){
         questionRepository.deleteById(id);
         return "Question deleted with id: " + id;
+    }
+
+    @Override
+    public String updateQuesStatus(Integer quesId, Integer statusId){
+        Question question = questionRepository.findById(quesId).orElse(null);
+        if(question == null) throw new ResourceNotFoundException("Question", "Question-Id", quesId);
+        QuestionStatus questionStatus = questionStatusRepo.findById(statusId).orElse(null);
+        if(questionStatus == null) throw new ResourceNotFoundException("Question-Status", "Status-Id", statusId);
+        question.setQuestionStatus(questionStatus);
+        questionRepository.save(question);
+        return "Question status is updated successfully";
     }
 }

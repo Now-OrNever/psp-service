@@ -1,10 +1,9 @@
 package com.non.controller;
 
-import com.non.Classes.UserClass;
 import com.non.model.User;
-import com.non.repository.UserRepository;
 import com.non.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    User getUser(@PathVariable long id){
+    ResponseEntity<User> getUser(@PathVariable long id){
         return userService.getUser(id);
     }
 

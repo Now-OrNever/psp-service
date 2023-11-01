@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import java.util.ArrayList;
 import java.util.List;
 
-@ComponentScan("com.non")
+@ComponentScan(basePackages = "com.non")
 @SpringBootApplication
 public class PSPMain {
 
