@@ -6,15 +6,14 @@ import com.non.model.User;
 import com.non.repository.QuestionRepository;
 import com.non.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.non.algorithm.FindNameofEntities;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000") // Allow requests from localhost:3000
@@ -22,51 +21,16 @@ import java.util.Map;
 public class Analysis {
 
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private QuestionRepository questionRepository;
+    private FindNameofEntities findNameofEntities;
 
-//    @RequestMapping("/users")
-//    List<UserClass> sendUsers() {
-//        List<UserClass> users =
-//    }
-
-    @RequestMapping("/users/{userId}")
-    User sendUser(@PathVariable long userId){
-        User user = userRepository.findById(userId).
-                orElseThrow(()-> new ResourceNotFoundException("User", "Id", userId));
-        return user;
+    // Sent all users' names and questions' names to user
+    @GetMapping("/user-names")
+    Map<Long, String> getNamesOfUsers(){
+        return findNameofEntities.Users();
     }
 
-    @RequestMapping("/users/{userId}/questions")
-    List<Question> sendQuestions(@PathVariable long userId){
-        User user = userRepository.findById(userId).
-                orElseThrow(()-> new ResourceNotFoundException("User", "Id", userId));
-        List<Question> questions = user.getQuestions();
-        return questions;
+    @GetMapping("/ques-names")
+    Map<Integer, String> getNamesOfQues(){
+        return findNameofEntities.Questions();
     }
-
-//    @RequestMapping("/questions")
-//    List<Question> sendQues() {
-//        List<Question> questions = questionRepository.findAll();
-//        return questions;
-//    }
-
-    // Filling user_question table
-//    @RequestMapping("/userID")
-//    User sendUser(){
-//        long userId = 3L;
-//        User user = userRepository.findById(userId).
-//                orElseThrow(()-> new ResourceNotFoundException("User", "Id", userId));
-//        System.out.println(user);
-//        List<Question> questions = new ArrayList<>();
-//        List<Integer> ids = new ArrayList<>();
-//        ids.add(3); ids.add(5); ids.add(6);
-//        questions = questionRepository.findAllById(ids);
-//        System.out.println(questions);
-//        user.setQuestions(questions);
-//        userRepository.save(user);
-//        return user;
-//    }
-
 }

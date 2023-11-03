@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Transactional
 @Data
@@ -18,6 +21,12 @@ public class QuestionStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String status;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Question> questions = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<User> users = new ArrayList<>();
 
 //    @OneToOne(fetch = FetchType.LAZY, mappedBy = "questionStatus")
 //    private Question question = null;

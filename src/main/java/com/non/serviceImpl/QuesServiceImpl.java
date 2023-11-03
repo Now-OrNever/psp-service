@@ -56,7 +56,7 @@ public class QuesServiceImpl implements QuesService {
         if(question == null) throw new ResourceNotFoundException("Question", "Question-Id", quesId);
         QuestionStatus questionStatus = questionStatusRepo.findById(statusId).orElse(null);
         if(questionStatus == null) throw new ResourceNotFoundException("Question-Status", "Status-Id", statusId);
-        question.setQuestionStatus(questionStatus);
+        question.getQuestionStatus().add(questionStatus);
         questionRepository.save(question);
         return "Question status is updated successfully";
     }

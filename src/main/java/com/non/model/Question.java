@@ -28,10 +28,10 @@ public class Question {
     @Column(name = "link", columnDefinition = "VARCHAR(255)")
     private String link;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private QuestionStatus questionStatus = null;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "questions", fetch = FetchType.LAZY)
+    private List<QuestionStatus> questionStatus = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "question")
     private List<Card> cards = new ArrayList<>();
 
     @JsonIgnore

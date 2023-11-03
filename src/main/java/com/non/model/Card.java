@@ -19,15 +19,15 @@ public class Card {
     private Integer id;
     private String name;
     private String timeComp;
-    private String memComp;
     private String comment;
+    private String memComp;
     private String difficulty;
     private String bookmark;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Question question;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
 }
