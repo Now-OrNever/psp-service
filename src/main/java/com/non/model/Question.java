@@ -28,49 +28,13 @@ public class Question {
     @Column(name = "link", columnDefinition = "VARCHAR(255)")
     private String link;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "questions", fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.REFRESH, mappedBy = "questions", fetch = FetchType.EAGER)
     private List<QuestionStatus> questionStatus = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "question")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "question")
     private List<Card> cards = new ArrayList<>();
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "questions")
-    private List<User> users;
-
-//    public Integer getId() {
-//        return id;
-//    }
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-//
-//    public String getLink() {
-//        return link;
-//    }
-//
-//    public void setLink(String link) {
-//        this.link = link;
-//    }
-//
-//    public List<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(List<User> users) {
-//        this.users = users;
-//    }
-//
-//    public Question() {
-//        this.users = new ArrayList<>();
-//    }
-//
-//    public Question(String title, String link) {
-//        this.title = title;
-//        this.link = link;
-//    }
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    private List<User> users = new ArrayList<>();
 }

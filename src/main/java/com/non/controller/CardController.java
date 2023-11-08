@@ -1,5 +1,6 @@
 package com.non.controller;
 
+import com.non.dto.CardDto;
 import com.non.model.Card;
 import com.non.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +16,23 @@ public class CardController {
     private CardService cardService;
 
     @PostMapping("/post")
-    public Card createCard(@RequestBody Card card){
-        return cardService.createCard(card);
+    public CardDto createCard(@RequestBody CardDto cardDto){
+        return cardService.createCard(cardDto);
     }
 
     @GetMapping("/get-all")
-    public List<Card> GetAll(){
+    public List<CardDto> GetAll(){
         return cardService.getAllCards();
     }
 
     @GetMapping("{id}")
-    public Card GetById(@PathVariable Integer id){
+    public CardDto GetById(@PathVariable Integer id){
         return cardService.getCardById(id);
     }
 
     @PutMapping("/put/{id}")
-    public Card PutCard(@PathVariable Integer id, @RequestBody Card card){
-        return cardService.updateCard(id, card);
+    public CardDto PutCard(@PathVariable Integer id, @RequestBody CardDto cardDto){
+        return cardService.updateCard(id, cardDto);
     }
 
     @DeleteMapping("/{id}")

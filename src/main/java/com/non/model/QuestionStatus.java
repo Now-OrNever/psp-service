@@ -22,12 +22,10 @@ public class QuestionStatus {
     private Long id;
     private String status;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<User> users = new ArrayList<>();
 
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "questionStatus")
-//    private Question question = null;
 }

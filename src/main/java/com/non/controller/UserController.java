@@ -1,5 +1,6 @@
 package com.non.controller;
 
+import com.non.dto.UserDto;
 import com.non.model.User;
 import com.non.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +18,23 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/")
-    User setUser(@RequestBody User user){
-        return userService.createUser(user);
+    UserDto setUser(@RequestBody UserDto userDto){
+        return userService.createUser(userDto);
     }
 
     @GetMapping("/")
-    List<User> getAllUsers(){
+    List<UserDto> getAllUsers(){
         return userService.getUsers();
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<User> getUser(@PathVariable long id){
+    UserDto getUser(@PathVariable long id){
         return userService.getUser(id);
     }
 
     @PutMapping("/{id}")
-    User updateUser(@PathVariable long id, @RequestBody User user){
-        return userService.updateUser(id, user);
+    UserDto updateUser(@PathVariable long id, @RequestBody UserDto userDto){
+        return userService.updateUser(id, null, userDto, null);
     }
 
     @DeleteMapping("/{id}")

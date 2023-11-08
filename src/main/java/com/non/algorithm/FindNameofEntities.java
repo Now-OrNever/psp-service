@@ -1,7 +1,10 @@
 package com.non.algorithm;
 
+import com.non.dto.QuesDto;
+import com.non.dto.UserDto;
 import com.non.model.Question;
 import com.non.model.User;
+import com.non.repository.UserRepository;
 import com.non.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -24,20 +27,20 @@ public class FindNameofEntities {
 
     @Bean
      public Map<Integer, String> Questions(){
-        List<Question> questions = quesService.getAllQues();
+        List<QuesDto> quesDtos = this.quesService.getAllQues();
          Map<Integer, String> names = new HashMap<>();
-        for (Question question : questions) {
-            names.put(question.getId(), question.getTitle());
+        for (QuesDto quesDto : quesDtos) {
+            names.put(quesDto.getId(), quesDto.getTitle());
         }
         return names;
     }
 
     @Bean
     public Map<Long, String> Users(){
-        List<User> users = userService.getUsers();
+        List<UserDto> userDtos = this.userService.getUsers();
         Map<Long, String> names = new HashMap<>();
-        for (User user : users) {
-            names.put(user.getUserId(), user.getUserName());
+        for (UserDto userDto : userDtos) {
+            names.put(userDto.getUserId(), userDto.getUserName());
         }
         return names;
     }

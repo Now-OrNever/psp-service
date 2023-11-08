@@ -1,5 +1,6 @@
 package com.non.controller;
 
+import com.non.dto.QuesDto;
 import com.non.model.Question;
 import com.non.service.QuesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +22,23 @@ public class QuesController {
     }
 
     @GetMapping("/")
-    List<Question> getAllQues(){
+    List<QuesDto> getAllQues(){
         return quesService.getAllQues();
     }
 
     @GetMapping("/{id}")
-    Question getQues(@PathVariable Integer id){
+    QuesDto getQues(@PathVariable Integer id){
         return quesService.getQuesById(id);
     }
 
     @PostMapping("/")
-    Question setQues(@RequestBody Question question){
-        return this.quesService.createQues(question);
+    QuesDto setQues(@RequestBody QuesDto quesDto){
+        return this.quesService.createQues(quesDto);
     }
 
     @PutMapping("/{id}")
-    Question updateQuestion(@PathVariable Integer id, @RequestBody Question question){
-        return quesService.updateQues(id, question);
+    QuesDto updateQuestion(@PathVariable Integer id, @RequestBody QuesDto quesDto){
+        return quesService.updateQues(id, quesDto, null);
     }
 
     @DeleteMapping("{id}")

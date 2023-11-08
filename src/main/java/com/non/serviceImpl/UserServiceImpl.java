@@ -1,18 +1,20 @@
 package com.non.serviceImpl;
 
-import com.non.Classes.UserClass;
+import com.non.dto.CardDto;
+import com.non.dto.QuesDto;
+import com.non.dto.UserDto;
 import com.non.exception.ResourceNotFoundException;
+import com.non.model.Card;
 import com.non.model.Question;
-import com.non.model.QuestionStatus;
 import com.non.model.User;
 import com.non.repository.UserRepository;
 import com.non.service.QuesService;
 import com.non.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.modelmapper.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,30 +22,53 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private QuesService quesService;
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserDto createUser(UserDto userDto) {
+        User user = this.modelMapper.map(userDto, User.class);
+        return  this.modelMapper.map(userRepository.save(user), UserDto.class);
     }
 
     @Override
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = new ArrayList<>();
+        for(User user:users) userDtos.add(this.modelMapper.map(user, UserDto.class));
+        return userDtos;
     }
 
     @Override
-    public ResponseEntity<User> getUser(Long id) {
-         return new ResponseEntity<>(userRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("User", "Id", id)), HttpStatus.ACCEPTED);
+    public UserDto getUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("User", "Id", id));
+        return this.modelMapper.map(user, UserDto.class);
     }
 
     @Override
-    public User updateUser(Long id, User user) {
-        User user1 = userRepository.findById(id)
+    public UserDto updateUser(Long id, Integer quesId, UserDto userDto, CardDto cardDto) {
+        User user = userRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("User", "Id", id));
 
-        user1.setName(user.getName());
-        user1.setUserName(user.getUserName());
-        return userRepository.save(user1);
+        if(userDto != null){
+            user.setName(userDto.getName());
+            user.setUserName(userDto.getUserName());
+        }
+        if(cardDto != null) {
+            user.getCards().add(this.modelMapper.map(cardDto, Card.class));
+            // Saving User in card is removed
+        }
+        if(quesId != null) {
+            QuesDto quesDto = quesService.getQuesById(quesId);
+            user.getQuestions().add(this.modelMapper.map(quesDto, Question.class));
+            this.modelMapper.map(quesDto, Question.class).getUsers().add(
+                    this.modelMapper.map(userDto, User.class)
+            );
+            quesService.updateQues(quesId, quesDto, null);
+        }
+        return this.modelMapper.map(userRepository.save(user), UserDto.class);
     }
 
     @Override
@@ -51,24 +76,4 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
         return "User is deleted with Id: " + id;
     }
-
-
-    // Extra Methods
-
-    private User userToModel(UserClass user){
-        User model = new User();
-        model.setName(user.getName());
-        model.setUserName(user.getUserName());
-        return model;
-    }
-
-    private UserClass modelToUser(User model){
-        UserClass user = new UserClass();
-        user.setId(model.getUserId());
-        user.setUserName(model.getUserName());
-        user.setName(model.getName());
-        user.setQues(model.getQuestions().size());
-        return user;
-    }
-
 }

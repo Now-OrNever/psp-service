@@ -1,46 +1,59 @@
 package com.non.serviceImpl;
 
+import com.non.dto.CardDto;
 import com.non.exception.ResourceNotFoundException;
 import com.non.model.Card;
 import com.non.repository.CardRepository;
 import com.non.service.CardService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class CardServiceImpl implements CardService {
 
     @Autowired
     private CardRepository cardRepository;
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
-    public Card createCard(Card card) {
-        return cardRepository.save(card);
+    public CardDto createCard(CardDto cardDto) {
+        return this.modelMapper.map(cardRepository.save(
+                this.modelMapper.map(cardDto, Card.class)
+        ), CardDto.class);
     }
 
     @Override
-    public List<Card> getAllCards() {
-        return cardRepository.findAll();
+    public List<CardDto> getAllCards() {
+        List<Card> cards = cardRepository.findAll();
+        List<CardDto> cardDtos = new ArrayList<>();
+        for(Card card:cards){
+            cardDtos.add(this.modelMapper.map(card, CardDto.class));
+        }
+        return cardDtos;
     }
 
     @Override
-    public Card getCardById(Integer id) {
-        return cardRepository.findById(id)
+    public CardDto getCardById(Integer id) {
+        Card card = cardRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Card", "Id", id));
+        return this.modelMapper.map(card, CardDto.class);
     }
 
     @Override
-    public Card updateCard(Integer id, Card card) {
+    public CardDto updateCard(Integer id, CardDto cardDto) {
         Card card1 = cardRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Card", "Id", id));
-        card1.setName(card.getName());
-        card1.setTimeComp(card.getTimeComp());
-        card1.setMemComp(card.getMemComp());
-        card1.setComment(card.getComment());
-        card1.setDifficulty(card.getDifficulty());
-        card1.setBookmark(card.getBookmark());
-        card1.setComment(card.getComment());
-        return cardRepository.save(card1);
+        card1.setName(cardDto.getName());
+        card1.setTimeComp(cardDto.getTimeComp());
+        card1.setMemComp(cardDto.getMemComp());
+        card1.setComment(cardDto.getComment());
+        card1.setDifficulty(cardDto.getDifficulty());
+        card1.setBookmark(cardDto.getBookmark());
+        card1.setComment(cardDto.getComment());
+        return this.modelMapper.map(cardRepository.save(card1), CardDto.class);
     }
 
     @Override
